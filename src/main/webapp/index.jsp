@@ -1,31 +1,24 @@
-<!DOCTYPE html>
-<html>
+<%@ include file="/header.html" %>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Murach's Java Servlets and JSP</title>
-    <link rel="stylesheet" href="styles/main.css" type="text/css" />
-</head>
-
-<body>
     <img src="images/logo.png" alt="Ảnh logo" width="100" height="100"><br>
     <h1>Survey</h1>
     <p>If you have a moment, we'd appreciate it if you would fill out this survey.</p>
     <h1>Your information:</h1>
-    <form action="emailList" method="post">
+    <p style="color: crimson;"><i>${message}</i></p>
+    <form action="survey" method="post">
         <input type="hidden" name="action" value="add">
 
         <label><b>First name:</b></label>
-        <input type="text" name="firstName" required><br>
+        <input type="text" name="firstName" value="${user.firstName}"><br>
 
         <label><b>Last name:</b></label>
-        <input type="text" name="lastName" required><br>
+        <input type="text" name="lastName" value="${user.lastName}"><br>
 
         <label><b>Email:</b></label>
-        <input type="email" name="email" required><br>
+        <input type="email" name="email" value="${user.email}"><br>
 
         <label><b>Date of birth:</b></label>
-        <input type="date" name="dateOfBirth" required><br>
+        <input type="date" name="dateOfBirth" value="${user.dateOfBirth}"><br>
         <h1>How did you hear about us?</h1>
         <p>
             <input type="radio" name="contactVia" value="Search engine">Search engine
@@ -45,8 +38,8 @@
             <option value="Email only">Email only</option>
             <option value="Postal mail only">Postal mail only</option>
         </select><br>
-        <input type=submit>
+        <label>&nbsp;</label>
+        <input type=submit value="Join Now">
     </form>
-</body>
 
-</html>
+<%@ include file="/footer.jsp" %>

@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="UTF-8">
-    <title>Murach's Java Servlets and JSP</title>
+<%@ include file="/header.html" %>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -41,9 +36,6 @@
             clear: both;
         }
     </style>
-</head>
-
-<body>
     <h1>Thanks for joining our email list</h1>
     <p>Here is the information that you entered:</p>
 
@@ -72,6 +64,5 @@
         <input type="hidden" name="action" value="join">
         <input type="submit" value="Return">
     </form>
-</body>
 
-</html>
+    <%@ include file="/footer.jsp" %>

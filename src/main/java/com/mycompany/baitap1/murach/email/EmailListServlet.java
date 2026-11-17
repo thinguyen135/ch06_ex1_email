@@ -1,8 +1,11 @@
 package com.mycompany.baitap1.murach.email;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -10,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import com.mycompany.baitap1.murach.business.Survey;
 import com.mycompany.baitap1.murach.business.User;
 
+@WebServlet(urlPatterns = {"/emailList", "/survey"})
 public class EmailListServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -22,7 +26,7 @@ public class EmailListServlet extends HttpServlet {
         }
 
         if (action.equals("join")) {
-            url = "/index.html";
+            url = "/index.jsp";
         } else if (action.equals("add")) {
             String firstName = request.getParameter("firstName");
             String lastName = request.getParameter("lastName");
@@ -33,6 +37,15 @@ public class EmailListServlet extends HttpServlet {
             String contactVia = request.getParameter("contactVia");
             String contactMethod = request.getParameter("contact_method");
 
+            String message;
+            if (firstName == null || lastName == null || email == null || firstName.isEmpty() || lastName.isEmpty()
+                    || email.isEmpty()) {
+                message = "Please fill out all three text boxes.";
+                url = "/index.jsp";
+            } else {
+                message = "";
+                url = "/thanks.jsp";
+            }
 
             if (checkBox1 == null) {
                 checkBox1 = "";
@@ -47,8 +60,12 @@ public class EmailListServlet extends HttpServlet {
 
             request.setAttribute("user", user);
             request.setAttribute("survey", survey);
-            url = "/thanks.jsp";
+            request.setAttribute("message", message);
         }
+
+        GregorianCalendar currentDate = new GregorianCalendar();
+        int currentYear = currentDate.get(Calendar.YEAR);
+        request.setAttribute("currentYear", currentYear);
 
         getServletContext()
                 .getRequestDispatcher(url)

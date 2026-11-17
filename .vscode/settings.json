@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "*.jsp": "html"
+    },
+    "emmet.includeLanguages": {
+        "jsp": "html"
+    }
+}
